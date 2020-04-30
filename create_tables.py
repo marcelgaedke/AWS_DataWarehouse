@@ -4,6 +4,14 @@ from sql_queries import create_table_queries, drop_table_queries
 
 
 def drop_tables(cur, conn):
+    """Drops all Tables if they exists
+    
+    Args: 
+        cur: Curser Object of psycopg2 Database Connection
+        conn: Connection Object
+        
+    Returns: None
+    """
     for query in drop_table_queries:
         print(query,'\n')
         cur.execute(query)
@@ -11,6 +19,14 @@ def drop_tables(cur, conn):
 
 
 def create_tables(cur, conn):
+    """Runs all Create Tables SQL Scripts from sql_queries.py
+    
+    Args: 
+        cur: Curser Object of psycopg2 Database Connection
+        conn: Connection Object
+        
+    Returns: None
+    """
     for query in create_table_queries:
         print(query,'\n')
         cur.execute(query)
@@ -18,6 +34,10 @@ def create_tables(cur, conn):
 
 
 def main():
+    """Main Program connects to Database and calls drop_tables and create_tables functions
+    Args: none
+    Returns: none
+    """
     config = configparser.ConfigParser()
     config.read('dwh.cfg')
 

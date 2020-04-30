@@ -84,7 +84,7 @@ user_table_create = ("""CREATE TABLE IF NOT EXISTS user_table
 song_table_create = ("""CREATE TABLE IF NOT EXISTS song
                         (
                             song_id varchar PRIMARY KEY DISTKEY SORTKEY, 
-                            title varchar NOT NULL, 
+                            title varchar, 
                             artist_id varchar NOT NULL, 
                             year int, 
                             duration numeric
@@ -94,7 +94,7 @@ song_table_create = ("""CREATE TABLE IF NOT EXISTS song
 artist_table_create = ("""CREATE TABLE IF NOT EXISTS artist
                           (
                               artist_id varchar PRIMARY KEY SORTKEY, 
-                              name varchar NOT NULL, 
+                              name varchar, 
                               location varchar, 
                               lattitude varchar, 
                               longitude varchar
@@ -106,12 +106,12 @@ artist_table_create = ("""CREATE TABLE IF NOT EXISTS artist
 time_table_create = ("""CREATE TABLE IF NOT EXISTS time
                         (
                             start_time timestamp PRIMARY KEY SORTKEY, 
-                            hour smallint NOT NULL, 
-                            day smallint NOT NULL, 
-                            week smallint NOT NULL, 
-                            month smallint NOT NULL, 
-                            year smallint NOT NULL, 
-                            weekday varchar NOT NULL
+                            hour smallint, 
+                            day smallint, 
+                            week smallint, 
+                            month smallint, 
+                            year smallint, 
+                            weekday varchar
                         )diststyle all;
 """)
 
@@ -141,6 +141,7 @@ songplay_table_insert = ("""INSERT INTO songplay (start_time, user_id, level, so
                             FROM staging_songs as s
                             JOIN staging_events as e 
                             ON (s.artist_name = e.artist AND s.title = e.song)
+                            WHERE e.page = 'NextSong'
 
 """)
 
